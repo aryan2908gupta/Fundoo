@@ -20,13 +20,29 @@ namespace DataLogicLayer.Repository
         public async Task<Note> CreateNoteAsync(Note note)
         {
             await context.Notes.AddAsync(note);
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return note;
         }
       public  async Task<IEnumerable<Note>> GetAllNotesAsync()
         {
             return await context.Notes.ToListAsync();
         }
+
+        public async Task<IEnumerable<Note>> GetAllNotesAsync(int userId, bool? archived, bool? trashed)
+        {
+            IQueryable<Note> query = context.Notes.Where(n => n.UserId == userId);
+
+            if (archived.HasValue)
+                query = query.Where(n => n.IsArchive == archived.Value);
+
+            if (trashed.HasValue)
+                query = query.Where(n => n.IsTrash == trashed.Value);
+
+            return await query
+                .OrderByDescending(n => n.UpdatedAt)   // optional sorting
+                .ToListAsync();
+        }
+
         public async Task<Note> GetNoteByIdAsync(int noteId, int userId)
         {
             return await context.Notes.FirstOrDefaultAsync(n => n.NotesId == noteId && n.UserId == userId);

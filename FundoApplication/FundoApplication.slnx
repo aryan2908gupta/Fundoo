@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="../BusinessLogicLayer/BusinessLogicLayer.csproj" Id="1afb0da0-8489-413c-985f-6eb4a5dbf5df" />
   <Project Path="../DataLogicLayer/DataLogicLayer.csproj" />
   <Project Path="../ModelLayer/ModelLayer.csproj" />
   <Project Path="FundoApplication.csproj" />

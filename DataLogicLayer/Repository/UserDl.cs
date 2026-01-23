@@ -28,7 +28,7 @@ namespace DataLogicLayer.Repository
         // Email Checking
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            return await context.Users.FirstOrDefaultAsync(x => x.Email == email);
+            return await context.Users.FirstOrDefaultAsync(x=>x.Email==email);
         }
 
         // Get User By id
